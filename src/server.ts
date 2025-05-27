@@ -20,10 +20,6 @@ const startServer = async () => {
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
       console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
-      console.log("\nAvailable endpoints:");
-      console.log("- GET  /api/health");
-      console.log("- GET  /api/inventory");
-      console.log("- GET  /api/products");
     });
   } catch (error) {
     console.error("Failed to start server:", error);
