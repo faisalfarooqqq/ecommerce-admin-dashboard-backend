@@ -174,35 +174,39 @@ export class InventoryController {
       } = req.query;
 
       let query = `
-        SELECT 
-          ih.*,
-          p.name as product_name,
-          p.sku
-        FROM inventory_history ih
-        JOIN products p ON ih.product_id = p.id
-        WHERE 1=1
-      `;
+      SELECT
+        ih.*,
+        p.name as product_name,
+        p.sku
+      FROM inventory_history ih
+      JOIN products p ON ih.product_id = p.id
+      WHERE 1=1
+    `;
+
       const params: any[] = [];
       let paramCount = 0;
 
       if (product_id) {
-        query += ` AND ih.product_id = ${++paramCount}`;
+        query += ` AND ih.product_id = $${++paramCount}`;
         params.push(product_id);
       }
+
       if (change_type) {
-        query += ` AND ih.change_type = ${++paramCount}`;
+        query += ` AND ih.change_type = $${++paramCount}`;
         params.push(change_type);
       }
+
       if (start_date) {
-        query += ` AND ih.created_at >= ${++paramCount}`;
+        query += ` AND ih.created_at >= $${++paramCount}`;
         params.push(start_date);
       }
+
       if (end_date) {
-        query += ` AND ih.created_at <= ${++paramCount}`;
+        query += ` AND ih.created_at <= $${++paramCount}`;
         params.push(end_date);
       }
 
-      query += ` ORDER BY ih.created_at DESC LIMIT ${++paramCount} OFFSET ${++paramCount}`;
+      query += ` ORDER BY ih.created_at DESC LIMIT $${++paramCount} OFFSET $${++paramCount}`;
       params.push(limit, offset);
 
       const result = await pool.query(query, params);
