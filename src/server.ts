@@ -23,6 +23,7 @@ const startServer = async () => {
       console.log("\nAvailable endpoints:");
       console.log("- GET  /api/health");
       console.log("- GET  /api/inventory");
+      console.log("- GET  /api/products");
     });
   } catch (error) {
     console.error("Failed to start server:", error);
