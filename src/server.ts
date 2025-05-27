@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import dotenv from "dotenv";
 import pool from "./config/database";
+import routes from "./routes";
 
 dotenv.config();
 const app: Application = express();
@@ -8,6 +9,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
+// Routes
+app.use("/api", routes);
 // Start Server
 const startServer = async () => {
   try {
@@ -17,6 +20,9 @@ const startServer = async () => {
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
       console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
+      console.log("\nAvailable endpoints:");
+      console.log("- GET  /api/health");
+      console.log("- GET  /api/inventory");
     });
   } catch (error) {
     console.error("Failed to start server:", error);
