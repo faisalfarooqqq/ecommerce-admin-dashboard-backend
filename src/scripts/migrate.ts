@@ -113,6 +113,8 @@ const createTables = async () => {
         FOR EACH ROW
         EXECUTE FUNCTION update_inventory_on_sale();
     `);
+    await client.query("COMMIT");
+    console.log("Database tables created successfully");
   } catch (error) {
     await client.query("ROLLBACK");
     console.error("Error creating tables:", error);
