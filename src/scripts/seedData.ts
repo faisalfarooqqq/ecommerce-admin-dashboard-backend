@@ -141,9 +141,9 @@ const seedData = async () => {
     // Seed inventory
     const inventoryData = productInserts.map((productId, index) => ({
       product_id: productId,
-      current_stock: Math.floor(Math.random() * 500) + 50,
-      reserved_stock: Math.floor(Math.random() * 20),
-      reorder_level: Math.floor(Math.random() * 50) + 10,
+      current_stock: 8000,
+      reserved_stock: 50,
+      reorder_level: 1000,
     }));
 
     await Promise.all(
